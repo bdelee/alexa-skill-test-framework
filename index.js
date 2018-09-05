@@ -443,6 +443,11 @@ module.exports = {
 						request.session.attributes = {};
 					}
 					request.session.sessionId = randomSessionId;
+					// adds values from withSessionAttributes to the session
+					if (currentItem.withSessionAttributes) {
+						var session = request.session.attributes;
+						for(var x in currentItem.withSessionAttributes) session[x] = currentItem.withSessionAttributes[x];
+					};
 					var callback = function (err, result) {
 						if (err) {
 							return ctx.fail(err);
